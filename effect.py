@@ -53,12 +53,21 @@ class AtAnimation:
     for cb in self.cbs:
       cb(self)
 
-class FadeIn(Effect):
-  def __init__(self, atobject, opacity_start=None, opacity_end=None, **kwargs) -> None:
+
+class Fade(Effect):
+  def __init__(self, atobject, opacity_end, opacity_start=None, **kwargs) -> None:
     super().__init__(**kwargs)
     self.atobject = atobject
     self.opacity_start = self.atobject.opacity if opacity_start is None else opacity_start
-    self.opacity_end = 1 if opacity_end is None else opacity_end
+    self.opacity_end = opacity_end
 
   def apply(self, proportion: float):
     self.atobject.opacity = self.opacity_start + (self.opacity_end-self.opacity_start)*proportion
+
+class FadeIn(Fade):
+  def __init__(self, atobject, opacity_end=1.0, **kwargs) -> None:
+    super().__init__(atobject, opacity_end=opacity_end, **kwargs)
+
+class FadeOut(Fade):
+  def __init__(self, atobject, opacity_end=0.0, **kwargs) -> None:
+    super().__init__(atobject, opacity_end=opacity_end, **kwargs)
