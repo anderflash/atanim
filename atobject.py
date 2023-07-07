@@ -1,6 +1,6 @@
 import numpy as np
 class AtShape:
-  def __init__(self, transform=None, ndim=None, rotation = 0.0, scale_factor=1.0) -> None:
+  def __init__(self, transform=None, ndim=None, rotation = 0.0, scale_factor=1.0, opacity=1.0) -> None:
     """
     Params
     ------
@@ -20,6 +20,7 @@ class AtShape:
     self.ndim = ndim
     self._rotation = rotation
     self._scale_factor = scale_factor
+    self.opacity = opacity
 
 
 class AtGroup(AtShape):
